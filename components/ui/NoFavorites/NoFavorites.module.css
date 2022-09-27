@@ -1,0 +1,14 @@
+.text {
+	color: white;
+	letter-spacing: 1px;
+	font-size: 1.15rem;
+}
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: center;
+}
+.pokemon {
+	opacity: 0.2;
+}
