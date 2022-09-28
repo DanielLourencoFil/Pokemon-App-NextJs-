@@ -31,15 +31,28 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 
 	return {
 		paths: [...urls],
-		fallback: false,
+		fallback: "blocking",
 	};
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { id } = params as { id: string };
+
+	const pokemon = await pokemonFecthData(id);
+
+	if (!pokemon) {
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
+		};
+	}
+
 	return {
 		props: {
-			pokemon: await pokemonFecthData(id),
+			pokemon,
+			revalidade: 86400,
 		},
 	};
 };

@@ -39,5 +39,5 @@
 	transition: border-color 0.5s;
 }
 .favorites:hover {
-	border-color: #000;
+	border-color: grey;
 }

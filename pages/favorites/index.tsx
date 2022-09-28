@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useFavorites } from "../../context/PokemonContext";
+// import { useFavorites } from "../../context/PokemonContext";
 
 import Image from "next/image";
 
@@ -12,24 +12,32 @@ import NoFavorites from "../../components/ui/NoFavorites/NoFavorites";
 import PokemonFavoritesCard from "../../components/pokemon/PokemonFavoritesCard";
 
 const Favorites = () => {
-	const { favoritesList } = useFavorites();
+	// const { favoritesList } = useFavorites();
 	const [pokemons, setPokemons] = useState<number[]>([]);
+	const [isRemovedFromFavorites, setIsRemovedFromFavorites] =
+		useState<number>(0);
 
 	useEffect(() => {
 		setPokemons(localFavorites.pokemons());
-	}, []);
+	}, [isRemovedFromFavorites]);
 
 	return (
 		<Layout title={"Pokemon App"}>
-			<PokemonList>
-				{pokemons.length === 0 ? (
-					<NoFavorites />
-				) : (
-					pokemons.map((id) => {
-						return <PokemonFavoritesCard id={id} key={id} />;
-					})
-				)}
-			</PokemonList>
+			{pokemons.length === 0 ? (
+				<NoFavorites />
+			) : (
+				<PokemonList>
+					{pokemons.map((id) => {
+						return (
+							<PokemonFavoritesCard
+								id={id}
+								key={id}
+								setIsRemovedFromFavorites={setIsRemovedFromFavorites}
+							/>
+						);
+					})}
+				</PokemonList>
+			)}
 		</Layout>
 	);
 };

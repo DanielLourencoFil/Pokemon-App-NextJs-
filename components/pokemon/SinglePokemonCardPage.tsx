@@ -8,6 +8,9 @@ import confetti from "canvas-confetti";
 import { PokemonFull } from "../../interfaces";
 import { localFavorites } from "../../utils/FavoritesStorage";
 
+import { MdAdd } from "react-icons/md";
+import { TbTrashX } from "react-icons/tb";
+
 import styles from "./SinglePokemonCardPage.module.css";
 
 type Props = {
@@ -53,10 +56,12 @@ const SinglePokemonCardPage: React.FC<Props> = ({ pokemon }) => {
 				<div className={styles["footer-top"]}>
 					<h2 className={styles.title}>{species.name}</h2>
 					<button
-						className={styles["favorite-btn"]}
+						className={`${styles["favorite-btn"]} ${styles.svg} ${
+							isFavorite ? styles["favorite-added"] : ""
+						}`}
 						onClick={() => favoritesHandle()}
 					>
-						{isFavorite ? "Χ " : " + "}Favorites
+						{isFavorite ? <TbTrashX /> : <MdAdd />} Favorites
 					</button>
 				</div>
 				<h2 className={styles.subtitle}>Sprites:</h2>
